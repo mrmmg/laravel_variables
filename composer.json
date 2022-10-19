@@ -1,0 +1,28 @@
+{
+    "name": "mrmmg/laravel_variables",
+    "license": "MIT",
+    "description": "Moderate your variables with easy api like Drupal",
+    "type": "package",
+    "keywords": ["laravel variable", "variables management", "variables"],
+    "authors": [
+        {
+            "name": "Mrmmg",
+            "email": "mrmmg76+github@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "files": ["src/helpers.php"],
+        "psr-4": {
+            "Mrmmg\\LaravelVariables\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mrmmg\\LaravelVariables\\LaravelVariablesServiceProvider"
+            ]
+        }
+    }
+}
