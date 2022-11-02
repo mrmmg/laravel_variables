@@ -1,6 +1,6 @@
 <?php
 
-global $variables;
+global $laravel_variables;
 
 /**
  * Returns the value of a variable if it exists, otherwise, the default value will be returned.
@@ -9,9 +9,9 @@ global $variables;
  * @return mixed|null
  */
 function variable_get($name, $default = NULL){
-    global $variables;
+    global $laravel_variables;
 
-    return $variables[$name] ?? $default;
+    return $laravel_variables[$name] ?? $default;
 }
 
 /**
@@ -22,14 +22,14 @@ function variable_get($name, $default = NULL){
  */
 function variable_set($name, $value){
     if(\Illuminate\Support\Facades\Schema::hasTable('variables')){
-        global $variables;
+        global $laravel_variables;
 
         \Illuminate\Support\Facades\DB::table('variables')->upsert([
             'name' => $name,
             'value' => serialize($value)
         ], 'name', ['value']);
 
-        $variables[$name] = $value;
+        $laravel_variables[$name] = $value;
     } else {
         throw new \ErrorException('Table `variables` does not found in database.');
     }
@@ -42,11 +42,11 @@ function variable_set($name, $value){
  */
 function variable_del($name){
     if(\Illuminate\Support\Facades\Schema::hasTable('variables')){
-        global $variables;
+        global $laravel_variables;
 
         \Illuminate\Support\Facades\DB::table('variables')->where('name', $name)->delete();
 
-        unset($variables[$name]);
+        unset($laravel_variables[$name]);
     } else {
         throw new \ErrorException('Table `variables` does not found in database.');
     }
