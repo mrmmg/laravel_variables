@@ -13,13 +13,12 @@ class LaravelVariablesServiceProvider extends ServiceProvider
     }
 
     private function initializeVariables(){
-        global $laravel_variables;
-
         if(Schema::hasTable('variables')){
             $vars = \Illuminate\Support\Facades\DB::table('variables')->get();
 
             if(!$vars->isEmpty()){
                 $vars->each(function ($var){
+                    global $laravel_variables;
                     $laravel_variables[$var->name] = unserialize($var->value);
                 });
             }
